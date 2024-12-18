@@ -1,0 +1,47 @@
+<section class="greeting" id="greeting">
+  <!--  <ng-doc-background style="opacity: 0.4"></ng-doc-background>-->
+  <div class="section-container">
+    <div class="container row space-between center">
+      <div class="greeting-content" [ngStyle]="{'max-width': '450px'}">
+        <h1 ng-doc-text>
+
+          Use PixiJS in Angular way</h1>
+        <p class="description" ng-doc-text>PixiJS primitives as Angular components</p>
+        <div class="greeting-buttons">
+          <a [rounded]="true" [routerLink]="['docs']" ng-doc-button-flat size="large">
+            <span ng-doc-text>
+              Quick start
+            </span>
+          </a>
+        </div>
+        <div class="greeting-shields">
+          <a href="https://www.npmjs.com/package/@klerick/ng-pixijs" target="_blank">
+            <img alt="NPM" src="https://img.shields.io/npm/v/@klerick/ng-pixijs.svg?style=for-the-badge" />
+          </a>
+
+          <a href="https://github.com/klerick/ng-pixijs/stargazers" target="_blank">
+            <img alt="STARS" src="https://img.shields.io/github/stars/klerick/ng-pixijs?style=for-the-badge" />
+          </a>
+
+          <a href="https://github.com/klerick/ng-pixijs/blob/main/LICENSE" target="_blank">
+            <img
+              alt="LICENSE"
+              src="https://img.shields.io/github/license/klerick/ng-pixijs.svg?style=for-the-badge" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="try-it" id="try-it">
+  <div class="section-container" [ngStyle]="{'max-width': '550px'}">
+    <h1 ng-doc-text>Demo!</h1>
+    <p class="description" ng-doc-text>
+      Classic game with PixiJS primitives
+    </p>
+    @if (isBrowser) {
+      <app-example />
+    }
+  </div>
+</section>

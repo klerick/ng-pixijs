@@ -1,0 +1,7 @@
+@for(item of sizeSnake(); track item.id){
+  <pixi-rect [size]="size" color="1558d6" [x]="item.positionX" [y]="item.positionY"/>
+}
+
+
+<pixi-rect [size]="size" color="#ff9f1a" [x]="food().x" [y]="food().y"/>
+

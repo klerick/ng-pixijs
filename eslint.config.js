@@ -28,6 +28,31 @@ module.exports = [
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     // Override or add rules here
-    rules: {},
+    rules: {
+      '@typescript-eslint/no-unused-expressions': [
+        'warn',
+        { "allowShortCircuit": true, "allowTernary": true }
+      ],
+      '@typescript-eslint/no-empty-function': [
+        'warn',
+        {
+          "allow": ["arrowFunctions"]
+        }
+      ]
+    },
+  },
+  {
+    files: ['**/*.json'],
+    rules: {
+      '@nx/dependency-checks': [
+        'error',
+        {
+          ignoredFiles: ['{projectRoot}/eslint.config.{js,cjs,mjs}'],
+        },
+      ],
+    },
+    languageOptions: {
+      parser: require('jsonc-eslint-parser'),
+    },
   },
 ];

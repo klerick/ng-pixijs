@@ -1,0 +1,34 @@
+
+<div class="game-speed">
+  @if (config().isStarted) {
+
+    Speed: {{ speed() }}
+  }
+</div>
+
+<pixi-scene
+  ngSkipHydration
+  [pixiJsConfig]="pixiJsConfig()"
+>
+  <pixi-bg-stage stage />
+  <pixi-snake-stage stage />
+</pixi-scene>
+
+<div class="game-info" [ngClass]="{start: config().isStarted}">
+
+  @if (!config().isStarted && config().isWin === undefined && !config().isRunning) {
+      <button ng-doc-button-flat (click)="startGame()">Start</button>
+  } @else if (config().isRunning) {
+      <button (click)="resetGame()" ng-doc-button-flat color="warning">Reset</button>
+    &nbsp;
+      <button ng-doc-button-flat (click)="stopGame()">Stop</button>
+  } @else if (config().isWin !== undefined) {
+      <button (click)="resetGame()" ng-doc-button-flat color="warning">Reset</button>
+  } @else {
+      <button (click)="startGame()"  ng-doc-button-flat>Start</button>
+  }
+</div>
+<div class="game-bg" *ngIf="!config().isStarted && config().isWin === undefined && !config().isRunning"></div>
+
+
+
