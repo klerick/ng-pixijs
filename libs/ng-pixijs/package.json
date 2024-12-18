@@ -1,0 +1,12 @@
+{
+  "name": "@klerick/ng-pixijs",
+  "version": "0.0.1",
+  "description": "PixiJS primitives as Angular components",
+
+  "peerDependencies": {
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0"
+  },
+  "files": [
+    "**/*"
+  ]}

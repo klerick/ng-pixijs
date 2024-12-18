@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@klerick/ng-pixijs": ["libs/ng-pixijs/src/index.ts"],
+      "@ng-doc/generated": ["./ng-doc/example-ng-pixijs/index.ts"],
+      "@ng-doc/generated/*": ["./ng-doc/example-ng-pixijs/*"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
