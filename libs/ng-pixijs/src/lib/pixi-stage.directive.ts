@@ -26,7 +26,6 @@ import {
   CanvasElementStorage,
   IS_PIXIJS,
   PIXI_APPLICATION_INIT,
-  PIXI_ELEMENT_PROPS_NAME,
   PixiComponent,
 } from './constants';
 

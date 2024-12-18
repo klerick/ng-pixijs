@@ -1,5 +1,5 @@
-import { Application, Graphics, GraphicsContext } from 'pixi.js';
-import { inject, InjectionToken } from '@angular/core';
+import { Graphics, GraphicsContext } from 'pixi.js';
+import { InjectionToken } from '@angular/core';
 
 
 function rectContextFactory(

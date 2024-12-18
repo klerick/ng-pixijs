@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { NgDocButtonComponent, NgDocTextComponent } from '@ng-doc/ui-kit';
 import { RouterLink } from '@angular/router';

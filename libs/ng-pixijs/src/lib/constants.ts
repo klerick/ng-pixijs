@@ -7,7 +7,7 @@ import {
   Graphics,
   Application,
 } from 'pixi.js';
-import { InjectionToken, signal, Type, WritableSignal } from '@angular/core';
+import { InjectionToken, Type, WritableSignal } from '@angular/core';
 
 export const prefix = 'pixi' as const;
 

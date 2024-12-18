@@ -26,7 +26,7 @@ module.exports = [
         'error',
         {
           type: 'attribute',
-          prefix: 'lib',
+          // prefix: 'lib',
           style: 'camelCase',
         },
       ],
@@ -34,7 +34,7 @@ module.exports = [
         'error',
         {
           type: 'element',
-          prefix: 'lib',
+          // prefix: 'lib',
           style: 'kebab-case',
         },
       ],
@@ -43,6 +43,17 @@ module.exports = [
   {
     files: ['**/*.html'],
     // Override or add rules here
-    rules: {},
+    rules: {
+      '@typescript-eslint/no-unused-expressions': [
+        'warn',
+        { "allowShortCircuit": true, "allowTernary": true }
+      ],
+      '@typescript-eslint/no-empty-function': [
+        'warn',
+        {
+          "allow": ["arrowFunctions"]
+        }
+      ]
+    },
   },
 ];

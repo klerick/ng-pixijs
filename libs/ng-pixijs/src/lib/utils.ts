@@ -63,7 +63,7 @@ export function setDefaultProps(target: any): any | null {
       const destroyRef = inject(DestroyRef);
       const appInitSubscription = toObservable(appInit)
         .pipe(distinctUntilChanged(), filter(Boolean))
-        .subscribe((r) => instance[PIXI_ON_INIT_PROPS_NAME]());
+        .subscribe(() => instance[PIXI_ON_INIT_PROPS_NAME]());
       destroyRef.onDestroy(() => appInitSubscription.unsubscribe());
     }
     return instance;

@@ -6,11 +6,11 @@ import {
   HostListener,
   inject,
   input,
-  OnDestroy, PLATFORM_ID,
+  OnDestroy,
   signal,
   viewChild
 } from '@angular/core';
-import { CommonModule, DOCUMENT, isPlatformServer } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { Application, ApplicationOptions } from 'pixi.js';
 
 import {
@@ -76,10 +76,7 @@ export class PixiSceneComponent implements OnDestroy {
       })
       .then(() => {
         this.pixiJsInit.set(true);
-        this.application.ticker.add((time) => {
-          // console.log(time.deltaTime);
-          this.application.render()
-        });
+        this.application.ticker.add(() => this.application.render());
       });
   }
 

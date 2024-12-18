@@ -7,7 +7,7 @@ export class PixijsRenderer implements Renderer2 {
   constructor(
     private delegate: Renderer2,
     private canvasElementStorage: Map<string, Type<Container<ContainerChild>>>,
-    private debug: boolean = false
+    private debug = false
   ) {}
 
   destroyNode(node: any): void {
@@ -89,7 +89,6 @@ export class PixijsRenderer implements Renderer2 {
     parent: Container,
     newChild: Container,
     refChild: Container,
-    isMove?: boolean
   ): void {
     this.debug && console.log('insertBefore', parent, newChild, refChild);
     const index = parent.children.findIndex((i) => i.uid === refChild.uid);

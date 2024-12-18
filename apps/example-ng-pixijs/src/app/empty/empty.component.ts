@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { NgDocButtonComponent, NgDocColor, NgDocNotifyService } from '@ng-doc/ui-kit';
 
 @Component({

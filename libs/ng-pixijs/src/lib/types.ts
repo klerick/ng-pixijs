@@ -1,4 +1,3 @@
-import { Container, Graphics, Sprite, Text, TilingSprite } from 'pixi.js';
 
 import {
   OnPixiInit,

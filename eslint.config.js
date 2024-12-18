@@ -28,7 +28,18 @@ module.exports = [
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     // Override or add rules here
-    rules: {},
+    rules: {
+      '@typescript-eslint/no-unused-expressions': [
+        'warn',
+        { "allowShortCircuit": true, "allowTernary": true }
+      ],
+      '@typescript-eslint/no-empty-function': [
+        'warn',
+        {
+          "allow": ["arrowFunctions"]
+        }
+      ]
+    },
   },
   {
     files: ['**/*.json'],

@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 
 export function assertInjector(
-  fn: Function,
+  fn: () => unknown,
   injector: Injector | undefined | null,
   runner?: () => any
 ) {

@@ -95,18 +95,16 @@ export class ExampleComponent {
   }
 
   resetGame() {
-    this.config.update((r) => {
-      return {
-        isRunning: false,
-        prevDirection: 'right',
-        direction: 'right',
-        isStarted: false,
-        count: 0,
-        speed: 0.5,
-        positionX: 0,
-        positionY: 0,
-        isWin: undefined,
-      };
+    this.config.set({
+      isRunning: false,
+      prevDirection: 'right',
+      direction: 'right',
+      isStarted: false,
+      count: 0,
+      speed: 0.5,
+      positionX: 0,
+      positionY: 0,
+      isWin: undefined,
     });
   }
 

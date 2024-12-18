@@ -1,6 +1,6 @@
 import { Directive, inject } from '@angular/core';
 import { injectAutoEffect, OnPixiInit, PixiComponent, PixiElement } from '@klerick/ng-pixijs';
-import { Application, TilingSprite } from 'pixi.js';
+import { TilingSprite } from 'pixi.js';
 import { TEXTURE_BG } from '../../utils/providers';
 
 @PixiElement(TilingSprite)
