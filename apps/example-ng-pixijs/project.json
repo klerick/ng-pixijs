@@ -1,0 +1,124 @@
+{
+  "name": "example-ng-pixijs",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/example-ng-pixijs/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@ng-doc/builder:application",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/apps/example-ng-pixijs",
+        "index": "apps/example-ng-pixijs/src/index.html",
+        "browser": "apps/example-ng-pixijs/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/example-ng-pixijs/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "node_modules/@ng-doc/app/assets",
+            "output": "assets/ng-doc/app"
+          },
+          {
+            "glob": "**/*",
+            "input": "node_modules/@ng-doc/ui-kit/assets",
+            "output": "assets/ng-doc/ui-kit"
+          },
+          {
+            "glob": "**/*",
+            "input": "ng-doc/example-ng-pixijs/assets",
+            "output": "assets/ng-doc"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/example-ng-pixijs/public"
+          },
+          "apps/example-ng-pixijs/src/assets"
+        ],
+        "styles": [
+          "node_modules/@ng-doc/app/styles/global.css",
+          "apps/example-ng-pixijs/src/styles.scss"
+        ],
+        "scripts": [],
+        "server": "apps/example-ng-pixijs/src/main.server.ts",
+        "ssr": {
+          "entry": "apps/example-ng-pixijs/src/server.ts"
+        },
+        "prerender": {
+          "discoverRoutes": true
+        },
+        "outputMode": "server",
+        "allowedCommonJsDependencies": [
+          "@ng-doc/core"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@ng-doc/builder:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "example-ng-pixijs:build:production"
+        },
+        "development": {
+          "buildTarget": "example-ng-pixijs:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "example-ng-pixijs:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "apps/example-ng-pixijs/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "example-ng-pixijs:build",
+        "staticFilePath": "dist/apps/example-ng-pixijs/browser",
+        "spa": true
+      }
+    }
+  }
+}

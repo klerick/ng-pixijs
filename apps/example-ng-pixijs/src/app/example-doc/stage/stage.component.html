@@ -1,0 +1,8 @@
+<pixi-container>
+  <pixi-text [style]="{fill: 'white'}" x="20" y="20">
+    Test
+  </pixi-text>
+  <pixi-tiling-sprite [texture]="texture" x="20" y="50" [width]="200" [height]="200"/>
+  <pixi-graphics x="50" y="300" [rect]="'0, 0, 9.5, 9.5'" [fill]="{ color: 'green' }" [stroke]="{ width: 0.5, color: 'red' }"/>
+  <pixi-graphics [x]="rectXPosition()" y="320" [context]="rectForTexture.context"/>
+</pixi-container>

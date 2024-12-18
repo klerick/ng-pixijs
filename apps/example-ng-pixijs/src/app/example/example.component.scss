@@ -1,0 +1,45 @@
+:host{
+  position: relative;
+}
+.game-bg{
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  opacity: 0.5;
+  z-index: 0;
+}
+//.game-action{
+//  position: absolute;
+//  left: 0;
+//  top: 32px;
+//  right: 0;
+//  bottom: 0;
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//  z-index: 1;
+//}
+.game-info{
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  &.start{
+    justify-content: right;
+    bottom: auto;
+    height: 40px;
+  }
+}
+.game-speed{
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
