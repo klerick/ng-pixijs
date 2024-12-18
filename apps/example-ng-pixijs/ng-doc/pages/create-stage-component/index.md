@@ -2,12 +2,12 @@
 keyword: CreateStageComponentPage
 ---
 
-To add a stage in PixiJS within your Angular application, you will work with the stage property of the [Application](https://pixijs.download/release/docs/app.Application.html#stage) class. 
-A PixiJS stage is essentially a container that holds all the display objects (sprites, graphics, etc.) that you want to render. 
+To add a stage in PixiJS within your Angular application, you will need to work with the stage property of the [Application](https://pixijs.download/release/docs/app.Application.html#stage) class. 
+A PixiJS stage is essentially a container that holds all display objects (sprites, graphics, etc.) that you want to render. 
 In this setup, you can have multiple stages, each represented by an Angular component.
 
 > **Note**
-> Ensure that add [**CUSTOM_ELEMENTS_SCHEMA**](https://angular.dev/guide/components/advanced-configuration#custom-element-schemas) to the component's schemas.
+> Ensure to add [**CUSTOM_ELEMENTS_SCHEMA**](https://angular.dev/guide/components/advanced-configuration#custom-element-schemas) to the component's schemas.
 
 The stage property of the Application class can be used to manage multiple stages. 
 Each Angular component can represent a separate stage, allowing you to modularize and organize your PixiJS application effectively.

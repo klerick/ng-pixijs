@@ -8,7 +8,7 @@ To create a scene using PixiJS within your Angular application, you can utilize 
 Import the `PixiSceneComponent` into the Angular component where you want to create your PixiJS scene.
 
 > **Note**
-> When using Angular's server-side rendering (SSR), it's important to add [ngSkipHydration](https://angular.dev/guide/hydration#how-to-skip-hydration-for-particular-components) to prevent server-side rendering of components that require direct access to browser APIs, like those using PixiJS.
+> When using Angular's server-side rendering (SSR), it's important to add [ngSkipHydration](https://angular.dev/guide/hydration#how-to-skip-hydration-for-particular-components) to prevent server-side rendering for the components that require direct access to browser APIs, like those using PixiJS.
 
 ```typescript group="create-scene" file="../../../src/app/example-doc/scene/scene.component.ts" name="scene.component.ts" 
 

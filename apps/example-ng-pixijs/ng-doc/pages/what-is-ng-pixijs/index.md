@@ -8,7 +8,7 @@ By utilizing a custom [RendererFactory2](https://angular.dev/api/core/RendererFa
 #### Key Features
 
 1. PixiJS Integration in Angular:
-  - Enables the use of standard primitives and features of PixiJS within an Angular application, ensuring smooth integration and interaction between the two frameworks.
+  - Enables the utilization of standard primitives and features of PixiJS within an Angular application, ensuring smooth integration and interaction between the two frameworks.
 
 2. Custom RendererFactory2:
   - Implements a custom RendererFactory2 that manages the rendering of the PixiJS scene. This allows developers to use PixiJS for creating complex graphics and animations while staying within the Angular ecosystem.
@@ -17,7 +17,7 @@ By utilizing a custom [RendererFactory2](https://angular.dev/api/core/RendererFa
   - Provides the ability to define custom Angular components that act as wrappers for PixiJS objects. This allows using Angular's component and template approach to manage graphics.
 
 4. Support for Dependency Injection (DI):
-  - Full support for Angular DI within components, simplifying state management and interactions between components based on PixiJS.
+  - Full support for Angular DI within components, simplifing state management and interactions between components based on PixiJS.
 
 5. Control Flow in Templates:
   - Support for Angular control flow directives in templates, enabling the use of constructs like *ngIf, *ngFor, and others for dynamically managing elements in the PixiJS scene.

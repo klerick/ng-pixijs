@@ -2,7 +2,7 @@
 keyword: AddDefaultPixijsPrimitivePage
 ---
 
-**NgPixiJS** - provide several component which allow work with PixiJs primitive in Angular way:
+**NgPixiJS** - provides several components that allow working with PixiJs primitive in Angular way:
 
 
 ```typescript
@@ -16,10 +16,10 @@ export interface HTMLElementTagNameMap {
   'pixi-graphics': Graphics;
 }
 ```
-These primitives you can use in your stages components:
+The following primitives you can use in your stage components:
 
 > **Warning**
-> There shouldn't be **HTML** components!!!
+> They shouldn't be **HTML** components!!!
 
 
 
