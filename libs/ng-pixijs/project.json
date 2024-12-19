@@ -4,7 +4,6 @@
   "sourceRoot": "libs/ng-pixijs/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
@@ -32,5 +31,6 @@
     "lint": {
       "executor": "@nx/eslint:lint"
     }
-  }
+  },
+  "tags": ["type:lib", "lib:ng-pixijs"]
 }

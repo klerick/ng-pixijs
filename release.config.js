@@ -19,7 +19,7 @@ module.exports = {
     '@semantic-release/release-notes-generator',
     '@semantic-release/changelog',
     [
-      './tools/semantic-plugins/publish-packages.js',
+      './tools/semantic-plugins/publish-packages.mjs',
       {
         packages: [
           {
@@ -29,20 +29,26 @@ module.exports = {
       },
     ],
     [
-      './tools/semantic-plugins/copy-package-info.js',
+      './tools/semantic-plugins/copy-package-info.mjs',
       {
         original: 'package.json',
-        keys: ['keywords', 'author', 'repository', 'bugs', 'homepage', 'license'],
-        packages: [
-          'dist/libs/ng-pixijs',
+        keys: [
+          'keywords',
+          'author',
+          'repository',
+          'bugs',
+          'homepage',
+          'license',
         ],
+        packages: ['dist/libs/ng-pixijs'],
       },
     ],
     [
       '@semantic-release/git',
       {
         assets: ['CHANGELOG.md', 'package.json'],
-        message: 'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
+        message:
+          'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
       },
     ],
     [
