@@ -1,9 +1,5 @@
-<ng-doc-root
-  [sidebar]="!hideSidebar()"
-  [noWidthLimit]="hideSidebar()"
-  [footerContent]="footerContent"
->
-  <ng-doc-navbar>
+<ng-doc-root [noWidthLimit]="!!hideSidebar()" [footerContent]="footerContent">
+  <ng-doc-navbar [ngClass]="{ 'hide-sidebar': hideSidebar() }">
     <a class="brand" routerLink="/" ngDocNavbarLeft>
       <h3>
         <!--&lt;!&ndash;            <img src="assets/images/ng-doc.svg" />&ndash;&gt;-->
@@ -18,20 +14,22 @@
         ng-doc-button-icon
         ngDocTooltip="Repository on GitHub"
         size="large"
-        target="_blank">
+        target="_blank"
+      >
         <ng-doc-icon [size]="24" customIcon="github"></ng-doc-icon>
       </a>
     </div>
-
   </ng-doc-navbar>
-  <ng-doc-sidebar></ng-doc-sidebar>
+  <ng-doc-sidebar *ngIf="!hideSidebar()"></ng-doc-sidebar>
   <router-outlet></router-outlet>
 </ng-doc-root>
 
-
 <ng-template #footerContent>
   <div class="ng-doc-footer">
-    MIT © {{ currentDate | date: 'yyyy' }}
-    &nbsp;<a href="https://www.linkedin.com/in/aleksandr-kharkovey/" target="_blank">Aleksandr Kharkovey</a>
+    MIT © {{ currentDate | date : 'yyyy' }} &nbsp;<a
+      href="https://www.linkedin.com/in/aleksandr-kharkovey/"
+      target="_blank"
+      >Aleksandr Kharkovey</a
+    >
   </div>
 </ng-template>
