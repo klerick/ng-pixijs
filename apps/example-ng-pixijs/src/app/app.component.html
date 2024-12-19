@@ -1,4 +1,8 @@
-<ng-doc-root [noWidthLimit]="!!hideSidebar()" [footerContent]="footerContent">
+<ng-doc-root
+  [sidebar]="!hideSidebar()"
+  [noWidthLimit]="!!hideSidebar()"
+  [footerContent]="footerContent"
+>
   <ng-doc-navbar [ngClass]="{ 'hide-sidebar': hideSidebar() }">
     <a class="brand" routerLink="/" ngDocNavbarLeft>
       <h3>
