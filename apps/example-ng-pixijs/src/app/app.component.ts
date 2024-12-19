@@ -1,18 +1,19 @@
 import { Component, inject } from '@angular/core';
+import { Location } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import {
   NgDocNavbarComponent,
   NgDocRootComponent,
   NgDocSidebarComponent,
-  NgDocThemeToggleComponent
+  NgDocThemeToggleComponent,
 } from '@ng-doc/app';
 import {
   NgDocButtonIconComponent,
   NgDocIconComponent,
   NgDocTooltipDirective,
-  preventInitialChildAnimations
+  preventInitialChildAnimations,
 } from '@ng-doc/ui-kit';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgClass, NgIf } from '@angular/common';
 import { filter, map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 
@@ -28,6 +29,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
     DatePipe,
     NgDocButtonIconComponent,
     NgDocTooltipDirective,
+    NgIf,
+    NgClass,
   ],
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -35,13 +38,20 @@ import { toSignal } from '@angular/core/rxjs-interop';
   standalone: true,
 })
 export class AppComponent {
+  location = inject(Location);
   router = inject(Router);
   title = 'NgPixiJS ';
   hideSidebar$ = this.router.events.pipe(
     filter((e) => e instanceof NavigationEnd),
-    map(() => this.router.url.split('/').filter((i) => !!i).length === 0)
+    map(() => this.isHideSidebar(this.router.url))
   );
 
-  hideSidebar = toSignal(this.hideSidebar$, { initialValue: true });
+  hideSidebar = toSignal(this.hideSidebar$, {
+    initialValue: this.isHideSidebar(this.location.path()),
+  });
   currentDate = new Date();
+
+  isHideSidebar(path: string) {
+    return !new URL(path, 'http://localhost').pathname.slice(1);
+  }
 }

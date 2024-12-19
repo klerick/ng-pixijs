@@ -1,4 +1,4 @@
-h3{
+h3 {
   cursor: pointer;
 }
 :host {
@@ -80,6 +80,13 @@ h3{
     button[ng-doc-button-icon],
     ng-doc-theme-toggle {
       margin-left: var(--ng-doc-base-gutter);
+    }
+  }
+}
+ng-doc-navbar.hide-sidebar {
+  ::ng-deep {
+    .ng-doc-menu {
+      display: none;
     }
   }
 }
