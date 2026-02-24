@@ -11,7 +11,7 @@
         <span class="brand-title-doc">PixiJS</span>
       </h3>
     </a>
-    <div @preventInitialChild class="ng-doc-header-controls" ngDocNavbarRight>
+    <div class="ng-doc-header-controls" ngDocNavbarRight>
       <ng-doc-theme-toggle></ng-doc-theme-toggle>
       <a
         href="https://github.com/klerick/ng-pixijs"
@@ -24,7 +24,9 @@
       </a>
     </div>
   </ng-doc-navbar>
-  <ng-doc-sidebar *ngIf="!hideSidebar()"></ng-doc-sidebar>
+  @if (!hideSidebar()) {
+  <ng-doc-sidebar></ng-doc-sidebar>
+  }
   <router-outlet></router-outlet>
 </ng-doc-root>
 

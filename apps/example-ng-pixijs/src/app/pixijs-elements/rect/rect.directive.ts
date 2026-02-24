@@ -2,20 +2,23 @@ import { Directive, input } from '@angular/core';
 import { PixiComponent, PixiElement } from '@klerick/ng-pixijs';
 import { Graphics } from 'pixi.js';
 
-
 @PixiElement(Graphics)
 @Directive({
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'pixi-rect',
   standalone: true,
 })
-export class PixiRectDirective extends PixiComponent<Graphics>{
-  size = input.required<number>()
-  x = input.required<number>()
-  y = input.required<number>()
-  color = input<string>(this.getRandomColor())
+export class PixiRectDirective extends PixiComponent<Graphics> {
+  size = input.required<number>();
+  x = input.required<number>();
+  y = input.required<number>();
+  color = input<string>(this.getRandomColor());
 
-  onRender(){
-    this.pixiElement.clear().rect(this.x(), this.y(), this.size(), this.size()).fill(this.color())
+  onRender() {
+    this.pixiElement
+      .clear()
+      .rect(this.x(), this.y(), this.size(), this.size())
+      .fill(this.color());
   }
 
   getRandomColor() {

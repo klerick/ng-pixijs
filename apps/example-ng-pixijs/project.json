@@ -8,9 +8,7 @@
   "targets": {
     "build": {
       "executor": "@ng-doc/builder:application",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/example-ng-pixijs",
         "index": "apps/example-ng-pixijs/src/index.html",
@@ -53,9 +51,7 @@
           "discoverRoutes": true
         },
         "outputMode": "server",
-        "allowedCommonJsDependencies": [
-          "@ng-doc/core"
-        ]
+        "allowedCommonJsDependencies": ["@ng-doc/core"]
       },
       "configurations": {
         "production": {
@@ -105,11 +101,10 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/example-ng-pixijs/jest.config.ts"
+        "jestConfig": "apps/example-ng-pixijs/jest.config.ts",
+        "tsConfig": "apps/example-ng-pixijs/tsconfig.spec.json"
       }
     },
     "serve-static": {
