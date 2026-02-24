@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/klerick/ng-pixijs/compare/v1.1.0...v1.2.0) (2026-02-24)
+
+
+### Features
+
+* **ng-pixijs:** add support for component input reflection in PixiStageDirective ([9ad315c](https://github.com/klerick/ng-pixijs/commit/9ad315cbec724f1a72a851fd933ffb53dade238b))
+
 # [1.1.0](https://github.com/klerick/ng-pixijs/compare/v1.0.0...v1.1.0) (2026-02-24)
 
 
