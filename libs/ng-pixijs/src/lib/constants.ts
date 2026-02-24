@@ -66,15 +66,3 @@ export class CommentContainer extends Container {
 export interface OnPixiInit {
   [PIXI_ON_INIT_PROPS_NAME]: () => void;
 }
-
-
-
-declare global {
-  export interface HTMLElementTagNameMap {
-    'pixi-container': Container;
-    'pixi-sprite': Sprite;
-    'pixi-tiling-sprite': TilingSprite;
-    'pixi-text': Text;
-    'pixi-graphics': Graphics;
-  }
-}

@@ -8,9 +8,9 @@ import {
   input,
   OnDestroy,
   signal,
-  viewChild
+  viewChild,
 } from '@angular/core';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { Application, ApplicationOptions } from 'pixi.js';
 
 import {
@@ -20,8 +20,9 @@ import {
 } from './constants';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'pixi-scene',
-  imports: [CommonModule],
+  imports: [],
   template: ` <canvas #pixiCanvas style="display: block;"></canvas> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -48,7 +49,6 @@ export class PixiSceneComponent implements OnDestroy {
   private readonly application = inject(Application);
   private readonly document = inject(DOCUMENT);
   private readonly pixiJsInit = inject(PIXI_APPLICATION_INIT);
-  // private readonly isServer = isPlatformServer(inject(PLATFORM_ID))
 
   private pixiCanvas =
     viewChild.required<ElementRef<HTMLCanvasElement>>('pixiCanvas');
@@ -62,7 +62,6 @@ export class PixiSceneComponent implements OnDestroy {
   }
 
   private createApplication() {
-
     this.application
       .init({
         autoDensity: true,

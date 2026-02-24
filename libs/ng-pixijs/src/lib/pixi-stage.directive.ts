@@ -52,6 +52,7 @@ function assertIsPixiComponentType(
 }
 
 @Directive({
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[stage]',
   standalone: true,
 })
@@ -122,7 +123,6 @@ export class PixiStageDirective implements OnInit, OnDestroy {
         'Component not found, you should use the @PixiComponent(true) decorator'
       );
     }
-
 
     this.stageRef = this.viewContainerRef.createComponent(stage, {
       environmentInjector: this.sceneEnvironmentInjector,
