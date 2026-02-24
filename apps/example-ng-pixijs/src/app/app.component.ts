@@ -11,14 +11,12 @@ import {
   NgDocButtonIconComponent,
   NgDocIconComponent,
   NgDocTooltipDirective,
-  preventInitialChildAnimations,
 } from '@ng-doc/ui-kit';
-import { DatePipe, NgClass, NgIf } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import { filter, map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
-  animations: [preventInitialChildAnimations],
   imports: [
     RouterModule,
     NgDocNavbarComponent,
@@ -29,7 +27,6 @@ import { toSignal } from '@angular/core/rxjs-interop';
     DatePipe,
     NgDocButtonIconComponent,
     NgDocTooltipDirective,
-    NgIf,
     NgClass,
   ],
   selector: 'app-root',

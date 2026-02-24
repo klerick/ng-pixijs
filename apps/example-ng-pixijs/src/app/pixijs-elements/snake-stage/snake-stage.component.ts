@@ -5,7 +5,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { OnPixiInit, PixiComponent, PixiContainer } from '@klerick/ng-pixijs';
 import { Container } from 'pixi.js';
 import { v7 as uuid } from 'uuid';
@@ -28,8 +28,8 @@ import {
 
 @PixiContainer(true)
 @Component({
-  selector: 'pixi-snake-stage',
-  imports: [CommonModule, PixiRectDirective],
+  selector: 'app-snake-stage',
+  imports: [PixiRectDirective],
   templateUrl: './snake-stage.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,

@@ -5,7 +5,8 @@ import {
   providePageSkeleton,
   NG_DOC_DEFAULT_PAGE_SKELETON,
   provideMainPageProcessor,
-  NG_DOC_DEFAULT_PAGE_PROCESSORS, provideMermaid
+  NG_DOC_DEFAULT_PAGE_PROCESSORS,
+  provideMermaid,
 } from '@ng-doc/app';
 import { provideNgDocContext } from '@ng-doc/generated';
 import {
@@ -13,10 +14,7 @@ import {
   withInterceptorsFromDi,
   withFetch,
 } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import {
-  ApplicationConfig,
-} from '@angular/core';
+import { ApplicationConfig } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { appRoutes } from './app.routes';
 import {
@@ -39,7 +37,6 @@ export const appConfig: ApplicationConfig = {
       withEventReplay(),
       withIncrementalHydration()
     ),
-    provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
     provideRouter(
       appRoutes,
