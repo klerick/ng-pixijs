@@ -13,6 +13,7 @@ import {
   output,
   OutputEmitterRef,
   OutputRefSubscription,
+  reflectComponentType,
   RendererFactory2,
   Type,
   ViewContainerRef,
@@ -68,6 +69,7 @@ export class PixiStageDirective implements OnInit, OnDestroy {
   private readonly eventListeners: {
     [key: string]: EventListenerOrEventListenerObject[];
   } = {};
+  private readonly inputValues: Record<string, any> = {};
 
   constructor() {
     const nativeElement = this.elementRef.nativeElement;
@@ -124,6 +126,29 @@ export class PixiStageDirective implements OnInit, OnDestroy {
       );
     }
 
+    const mirror = reflectComponentType(stage);
+
+    if (mirror) {
+      const nativeElement = this.elementRef.nativeElement;
+      for (const input of mirror.inputs) {
+        const name = input.templateName;
+        if (!(name in nativeElement)) {
+          continue;
+        }
+        this.inputValues[name] = nativeElement[name];
+        Object.defineProperty(nativeElement, name, {
+          set: (value: any) => {
+            this.inputValues[name] = value;
+            if (this.stageRef) {
+              this.stageRef.setInput(name, value);
+            }
+          },
+          get: () => this.inputValues[name],
+          configurable: true,
+        });
+      }
+    }
+
     this.stageRef = this.viewContainerRef.createComponent(stage, {
       environmentInjector: this.sceneEnvironmentInjector,
       injector: this.injector,
@@ -132,6 +157,11 @@ export class PixiStageDirective implements OnInit, OnDestroy {
     if (!this.stageRef) {
       throw new Error('Component not found');
     }
+
+    for (const [name, value] of Object.entries(this.inputValues)) {
+      this.stageRef.setInput(name, value);
+    }
+
     const instance = this.stageRef.instance;
     const outputs = this.getOutputs(instance);
     this.outputRefSubscription = outputs
