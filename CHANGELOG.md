@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/klerick/ng-pixijs/compare/v1.2.0...v1.3.0) (2026-02-25)
+
+
+### Features
+
+* **ng-pixijs:** enhance output detection logic in PixiStageDirective with subscription support ([1428472](https://github.com/klerick/ng-pixijs/commit/14284725a671e56c7a49054588d5c2fdbca28057))
+
 # [1.2.0](https://github.com/klerick/ng-pixijs/compare/v1.1.0...v1.2.0) (2026-02-24)
 
 
