@@ -40,7 +40,8 @@ function assertKeInInInstance<K extends string>(
 ): component is OutputObject<K> {
   return (
     component[prop] instanceof EventEmitter ||
-    component[prop] instanceof OutputEmitterRef
+    component[prop] instanceof OutputEmitterRef ||
+    typeof component[prop]['subscribe'] === 'function'
   );
 }
 
@@ -164,6 +165,7 @@ export class PixiStageDirective implements OnInit, OnDestroy {
 
     const instance = this.stageRef.instance;
     const outputs = this.getOutputs(instance);
+    console.log(outputs, 'outputs');
     this.outputRefSubscription = outputs
       .map((outputProp) => {
         if (!assertKeInInInstance(instance, outputProp)) return null;
