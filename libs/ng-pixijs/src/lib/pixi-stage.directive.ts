@@ -165,7 +165,6 @@ export class PixiStageDirective implements OnInit, OnDestroy {
 
     const instance = this.stageRef.instance;
     const outputs = this.getOutputs(instance);
-    console.log(outputs, 'outputs');
     this.outputRefSubscription = outputs
       .map((outputProp) => {
         if (!assertKeInInInstance(instance, outputProp)) return null;
