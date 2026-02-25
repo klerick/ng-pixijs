@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/klerick/ng-pixijs/compare/v1.3.0...v1.3.1) (2026-02-25)
+
+
+### Bug Fixes
+
+* **ng-pixijs:** remove debug log from PixiStageDirective ([baa677f](https://github.com/klerick/ng-pixijs/commit/baa677f02ade328296ec64a96f528c835e0a5872))
+
 # [1.3.0](https://github.com/klerick/ng-pixijs/compare/v1.2.0...v1.3.0) (2026-02-25)
 
 
