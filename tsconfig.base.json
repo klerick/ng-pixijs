@@ -4,7 +4,7 @@
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
@@ -13,12 +13,16 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
     "paths": {
-      "@klerick/ng-pixijs": ["libs/ng-pixijs/src/index.ts"],
+      "@klerick/ng-pixijs": ["./libs/ng-pixijs/src/index.ts"],
       "@ng-doc/generated": ["./ng-doc/example-ng-pixijs/index.ts"],
       "@ng-doc/generated/*": ["./ng-doc/example-ng-pixijs/*"]
-    }
+    },
+    "strict": false,
+    "noUncheckedSideEffectImports": false,
+    "types": ["*"],
+    "esModuleInterop": false,
+    "ignoreDeprecations": "6.0"
   },
   "exclude": ["node_modules", "tmp"]
 }
