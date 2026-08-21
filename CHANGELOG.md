@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/klerick/ng-pixijs/compare/v1.3.1...v1.3.2) (2026-08-21)
+
+
+### Bug Fixes
+
+* **ng-pixijs:** guard output detection against undefined properties ([3d8037e](https://github.com/klerick/ng-pixijs/commit/3d8037ec192e31c6a1db1622ee6eeda3d45d9430))
+
 ## [1.3.1](https://github.com/klerick/ng-pixijs/compare/v1.3.0...v1.3.1) (2026-02-25)
 
 
