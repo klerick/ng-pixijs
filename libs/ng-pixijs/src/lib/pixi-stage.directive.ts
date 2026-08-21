@@ -38,10 +38,11 @@ function assertKeInInInstance<K extends string>(
   component: any,
   prop: K
 ): component is OutputObject<K> {
+  const value = component[prop];
   return (
-    component[prop] instanceof EventEmitter ||
-    component[prop] instanceof OutputEmitterRef ||
-    typeof component[prop]['subscribe'] === 'function'
+    value instanceof EventEmitter ||
+    value instanceof OutputEmitterRef ||
+    typeof value?.subscribe === 'function'
   );
 }
 

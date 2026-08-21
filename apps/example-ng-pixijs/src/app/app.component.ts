@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { Location } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import {
@@ -32,6 +32,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class AppComponent {

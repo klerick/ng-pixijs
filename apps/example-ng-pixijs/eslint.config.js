@@ -24,6 +24,12 @@ module.exports = [
           style: 'kebab-case',
         },
       ],
+      // Newly enabled by the angular-eslint 22 preset. Angular 22 made OnPush the
+      // default strategy, and the v22 migration added an explicit
+      // `ChangeDetectionStrategy.Eager` to AppComponent to preserve the old
+      // always-check behaviour — which this rule then flags. Off until AppComponent
+      // is actually reviewed for OnPush.
+      '@angular-eslint/prefer-on-push-component-change-detection': 'off',
     },
   },
   {
