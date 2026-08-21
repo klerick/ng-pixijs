@@ -43,17 +43,6 @@ module.exports = [
   {
     files: ['**/*.html'],
     // Override or add rules here
-    rules: {
-      '@typescript-eslint/no-unused-expressions': [
-        'warn',
-        { "allowShortCircuit": true, "allowTernary": true }
-      ],
-      '@typescript-eslint/no-empty-function': [
-        'warn',
-        {
-          "allow": ["arrowFunctions"]
-        }
-      ]
-    },
+    rules: {},
   },
 ];

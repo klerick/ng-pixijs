@@ -13,6 +13,7 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
   withFetch,
+  withXhr,
 } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
@@ -37,7 +38,7 @@ export const appConfig: ApplicationConfig = {
       withEventReplay(),
       withIncrementalHydration()
     ),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withXhr(), withInterceptorsFromDi()),
     provideRouter(
       appRoutes,
       withInMemoryScrolling({
