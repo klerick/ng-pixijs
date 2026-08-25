@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/klerick/ng-pixijs/compare/v1.3.2...v1.3.3) (2026-08-25)
+
+
+### Bug Fixes
+
+* **ng-pixijs:** render once per frame and guard destroy before init ([a18fc7d](https://github.com/klerick/ng-pixijs/commit/a18fc7de92eed6835dfdc3178529c565cbe8d84c))
+
 ## [1.3.2](https://github.com/klerick/ng-pixijs/compare/v1.3.1...v1.3.2) (2026-08-21)
 
 
