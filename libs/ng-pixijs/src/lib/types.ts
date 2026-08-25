@@ -1,4 +1,3 @@
-
 import {
   OnPixiInit,
   PixiComponent,
@@ -7,14 +6,13 @@ import {
   PIXI_APP_PROPS_NAME,
   PIXI_ON_INIT_PROPS_NAME,
   PIXI_ON_RENDER_PROPS_NAME,
+  PixiChildrenNotAllowedError,
 } from './constants';
 
 import { PixiElement, PixiContainer } from './directive';
 
 export { PixiSceneComponent } from './pixi-scene.component';
 export { PixiStageDirective } from './pixi-stage.directive';
-
-
 
 export {
   OnPixiInit,
@@ -26,4 +24,5 @@ export {
   PIXI_APP_PROPS_NAME,
   PIXI_ON_INIT_PROPS_NAME,
   PIXI_ON_RENDER_PROPS_NAME,
+  PixiChildrenNotAllowedError,
 };

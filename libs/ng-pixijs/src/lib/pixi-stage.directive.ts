@@ -27,6 +27,7 @@ import {
   CanvasElementStorage,
   IS_PIXIJS,
   PIXI_APPLICATION_INIT,
+  PixiChildrenNotAllowedError,
   PixiComponent,
 } from './constants';
 
@@ -188,6 +189,11 @@ export class PixiStageDirective implements OnInit, OnDestroy {
       try {
         this.runStage();
       } catch (e) {
+        // A template that puts children where pixi allows none is a mistake in the
+        // consumer's code, not a transient failure worth swallowing: logging it here
+        // would leave a silently empty stage, which is the failure mode this error
+        // exists to remove. Everything else keeps the old behaviour.
+        if (e instanceof PixiChildrenNotAllowedError) throw e;
         console.error(e);
       }
     });
