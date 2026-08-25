@@ -1,3 +1,50 @@
+# [1.5.0](https://github.com/klerick/ng-pixijs/compare/v1.4.0...v1.5.0) (2026-08-25)
+
+
+* feat(ng-pixijs)!: refuse children on elements pixi treats as leaves ([ddd2588](https://github.com/klerick/ng-pixijs/commit/ddd258803aa8d0d44694be812ccea1e3c8c8b6bb))
+
+
+### BREAKING CHANGES
+
+* a template that puts children inside a drawing element now
+throws PixiChildrenNotAllowedError instead of building the tree. Templates
+relying on the old behaviour stop working and must nest the drawing object
+inside a Container.
+
+pixi 8 draws through ViewContainer, which sets allowChildren to false, so
+Graphics, Sprite, TilingSprite, Text, Mesh and the rest are leaves; only a
+plain Container may hold children. pixi itself only warns, once per child,
+with a stack pointing at the consumer's template rather than at the cause.
+
+The renderer could not see this because its guard is an instanceof and a
+drawing class IS a Container by inheritance, so a Graphics parent passed the
+check and went on to addChild. That assumption dates from pixi 6, where
+Graphics held children legitimately. It now checks allowChildren in both
+appendChild and insertBefore and reports the tag, the class it is registered
+as, and what to do instead.
+
+This is not only about @PixiContainer(false, Graphics): the default element
+storage already maps pixi-graphics, pixi-sprite, pixi-text and
+pixi-tiling-sprite to drawing classes, so <pixi-graphics> with anything
+inside it was the same mistake with no decorator involved. The guard covers
+both.
+
+PixiStageDirective rethrows this one error rather than logging it. Its catch
+exists to keep a transient failure from killing the stage, but swallowing
+this one would leave a silently empty scene -- the exact failure this error
+exists to remove. Every other error keeps the old behaviour.
+
+Reproduced before the change and verified after: with a child inside
+<pixi-graphics> the error now names the tag and no pixi deprecation warning
+is emitted at all, since nothing reaches addChild.
+
+The custom-component guide gains the rule, the failure and the correct shape
+-- a Container with the drawing object inside it, reached through a template
+reference variable, which resolves to the display object rather than a DOM
+node. That last fact was load-bearing and written down nowhere.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+
 # [1.4.0](https://github.com/klerick/ng-pixijs/compare/v1.3.3...v1.4.0) (2026-08-25)
 
 
