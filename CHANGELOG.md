@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/klerick/ng-pixijs/compare/v1.3.3...v1.4.0) (2026-08-25)
+
+
+### Features
+
+* **ng-pixijs:** report application start and failure to the scene's owner ([2eb9738](https://github.com/klerick/ng-pixijs/commit/2eb9738358bec834d192bcd057f9195e27ba6335))
+
 ## [1.3.3](https://github.com/klerick/ng-pixijs/compare/v1.3.2...v1.3.3) (2026-08-25)
 
 
