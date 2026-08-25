@@ -66,3 +66,26 @@ export class CommentContainer extends Container {
 export interface OnPixiInit {
   [PIXI_ON_INIT_PROPS_NAME]: () => void;
 }
+
+/**
+ * Thrown when a template puts children inside an element that cannot hold any.
+ *
+ * PixiJS 8 draws through `ViewContainer`, which sets `allowChildren` to false:
+ * `Graphics`, `Sprite`, `TilingSprite`, `Text`, `Mesh` and the rest of the drawing
+ * classes are leaves. Only a plain `Container` may have children. pixi itself only
+ * warns about it -- this library refuses, because a tree built that way is one pixi
+ * has already announced it will stop supporting.
+ */
+export class PixiChildrenNotAllowedError extends Error {
+  constructor(parent: Container, elementName?: string) {
+    const tag = elementName ? `<${elementName}>` : 'This element';
+    const type = parent.constructor.name;
+    super(
+      `${tag} is registered as ${type}, which cannot hold children in PixiJS 8. ` +
+        `Only a plain Container may have children -- every drawing class extends ` +
+        `ViewContainer, which sets allowChildren to false. Register it as a Container ` +
+        `and put the ${type} inside it as a child element.`
+    );
+    this.name = 'PixiChildrenNotAllowedError';
+  }
+}
