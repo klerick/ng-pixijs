@@ -1,7 +1,11 @@
 import { Renderer2, RendererStyleFlags2, Type } from '@angular/core';
 import { Container, ContainerChild, Text, TextStyle } from 'pixi.js';
 import { setCustomProps, TextValue } from '../utils';
-import { CommentContainer, ELEMENT_NAME } from '../constants';
+import {
+  CommentContainer,
+  ELEMENT_NAME,
+  PixiChildrenNotAllowedError,
+} from '../constants';
 
 export class PixijsRenderer implements Renderer2 {
   constructor(
@@ -9,6 +13,19 @@ export class PixijsRenderer implements Renderer2 {
     private canvasElementStorage: Map<string, Type<Container<ContainerChild>>>,
     private debug = false
   ) {}
+
+  /**
+   * `instanceof Container` is not enough on its own: every drawing class inherits
+   * from `Container` and yet refuses children, so a `Graphics` parent passes the
+   * type check and then trips pixi's deprecation warning on each child.
+   */
+  private assertCanHaveChildren(parent: Container): void {
+    if (parent.allowChildren) return;
+    throw new PixiChildrenNotAllowedError(
+      parent,
+      (parent as unknown as Record<symbol, string>)[ELEMENT_NAME]
+    );
+  }
 
   destroyNode(node: any): void {
     this.debug && console.log('destroyNode', node);
@@ -23,6 +40,7 @@ export class PixijsRenderer implements Renderer2 {
     this.debug && console.log('appendChild', parent, newChild);
 
     if (parent instanceof Container && newChild instanceof Container) {
+      this.assertCanHaveChildren(parent);
       parent.addChild(newChild);
       return;
     }
@@ -45,9 +63,10 @@ export class PixijsRenderer implements Renderer2 {
     try {
       this.delegate.appendChild(parent, newChild);
     } catch (e) {
-      console.warn('Check your template of your PixiJs component. The element must not contain HTML or you find bug:)');
+      console.warn(
+        'Check your template of your PixiJs component. The element must not contain HTML or you find bug:)'
+      );
     }
-
   }
 
   createComment(value: string): any {
@@ -88,9 +107,10 @@ export class PixijsRenderer implements Renderer2 {
   insertBefore(
     parent: Container,
     newChild: Container,
-    refChild: Container,
+    refChild: Container
   ): void {
     this.debug && console.log('insertBefore', parent, newChild, refChild);
+    this.assertCanHaveChildren(parent);
     const index = parent.children.findIndex((i) => i.uid === refChild.uid);
 
     parent.addChildAt(newChild, index);
