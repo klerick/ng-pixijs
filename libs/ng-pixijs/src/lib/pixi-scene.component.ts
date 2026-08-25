@@ -75,12 +75,14 @@ export class PixiSceneComponent implements OnDestroy {
       })
       .then(() => {
         this.pixiJsInit.set(true);
-        this.application.ticker.add(() => this.application.render());
       });
   }
 
   ngOnDestroy(): void {
-    if (typeof this.application.destroy === 'function') {
+    // `init()` may still be pending, or have rejected outright -- jsdom offers
+    // neither WebGL nor a 2d context. `renderer` is unset in that state and
+    // `destroy()` throws, which surfaces to consumers as a failed test teardown.
+    if (this.application.renderer) {
       this.application.destroy();
     }
   }
