@@ -1,3 +1,16 @@
+# [1.6.0](https://github.com/klerick/ng-pixijs/compare/v1.5.0...v1.6.0) (2026-10-14)
+
+
+### Bug Fixes
+
+* **ng-pixijs:** destroy an application whose scene left before init() settled ([66c96c0](https://github.com/klerick/ng-pixijs/commit/66c96c07d6c44040abe582ce6e7dd7e3061576ff))
+* **ng-pixijs:** stop console noise, guard missing children, destroy the stage injector ([9bca7f5](https://github.com/klerick/ng-pixijs/commit/9bca7f5ccc8a55f5e71b15f975918e17bb74e701))
+
+
+### Features
+
+* **ng-pixijs:** let the scene follow its host's size with followHost ([fe6945d](https://github.com/klerick/ng-pixijs/commit/fe6945dbcaadfffff5d2338f812d9d16d85a582b))
+
 # [1.5.0](https://github.com/klerick/ng-pixijs/compare/v1.4.0...v1.5.0) (2026-08-25)
 
 
