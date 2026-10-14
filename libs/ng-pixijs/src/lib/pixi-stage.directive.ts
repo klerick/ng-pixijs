@@ -112,7 +112,7 @@ export class PixiStageDirective implements OnInit, OnDestroy {
 
   private runStage() {
     if (!this.pixiJsInit()) return;
-    this.ngOnDestroy();
+    this.destroyStage();
     const stage = this.canvasElementStorage.get(
       'stage-' + this.elementRef.nativeElement.tagName.toLocaleLowerCase()
     );
@@ -200,13 +200,22 @@ export class PixiStageDirective implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.destroyStage();
+    // Created by hand in the field initialiser, so nothing else destroys it.
+    this.sceneEnvironmentInjector.destroy();
+  }
+
+  /** Tears down the current stage only; `runStage` calls it before rebuilding. */
+  private destroyStage(): void {
     if (this.stageRef) {
       this.application.stage.removeChild(this.stageRef.location.nativeElement);
       this.stageRef.destroy();
+      this.stageRef = undefined;
     }
     for (const i of this.outputRefSubscription) {
       i.unsubscribe();
     }
+    this.outputRefSubscription = [];
   }
 
   private getOutputs(componentInstance: any): string[] {
