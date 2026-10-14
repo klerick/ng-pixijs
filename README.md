@@ -31,11 +31,11 @@ By utilizing a custom [RendererFactory2](https://angular.dev/api/core/RendererFa
 
 #### Key Features
 
-- PixiJS Integration in Angular:
-- Custom RendererFactory2:
-- Creation of Custom Components:
-- Support for Dependency Injection (DI):
-- Control Flow in Templates:
+- PixiJS Integration in Angular
+- Custom RendererFactory2
+- Creation of Custom Components
+- Support for Dependency Injection (DI)
+- Control Flow in Templates
 
 ## Installation
 
@@ -47,6 +47,6 @@ To know how to install and use NgPixiJS, please check our [documentation](https:
 [npm-shield]: https://img.shields.io/npm/v/@klerick/ng-pixijs.svg?style=for-the-badge
 [npm-url]: https://www.npmjs.com/package/@klerick/ng-pixijs
 [license-shield]: https://img.shields.io/github/license/klerick/ng-pixijs.svg?style=for-the-badge
-[license-url]: https://github.com/ng-doc/klerick/ng-pixijs/blob/main/LICENSE
+[license-url]: https://github.com/klerick/ng-pixijs/blob/main/LICENSE
 [build-shield]: https://img.shields.io/github/actions/workflow/status/klerick/ng-pixijs/release.yml?style=for-the-badge&branch=release
 [build-url]: https://github.com/klerick/ng-pixijs/actions

@@ -107,12 +107,20 @@ export class PixijsRenderer implements Renderer2 {
   insertBefore(
     parent: Container,
     newChild: Container,
-    refChild: Container
+    refChild: Container | null
   ): void {
     this.debug && console.log('insertBefore', parent, newChild, refChild);
     this.assertCanHaveChildren(parent);
-    const index = parent.children.findIndex((i) => i.uid === refChild.uid);
+    const index = refChild
+      ? parent.children.findIndex((i) => i.uid === refChild.uid)
+      : -1;
 
+    // Same as the DOM: no reference node, or one that is not a child of
+    // `parent`, means append. `addChildAt(-1)` would throw instead.
+    if (index === -1) {
+      parent.addChild(newChild);
+      return;
+    }
     parent.addChildAt(newChild, index);
   }
 
@@ -127,7 +135,7 @@ export class PixijsRenderer implements Renderer2 {
   }
 
   nextSibling(node: any): any {
-    !this.debug && console.log('nextSibling', node);
+    this.debug && console.log('nextSibling', node);
   }
 
   parentNode(node: any): any {
@@ -137,7 +145,7 @@ export class PixijsRenderer implements Renderer2 {
   }
 
   removeAttribute(el: any, name: string, namespace?: string | null): void {
-    !this.debug && console.log('removeAttribute', el, name, namespace);
+    this.debug && console.log('removeAttribute', el, name, namespace);
   }
 
   removeChild(parent: any, oldChild: any, isHostElement?: boolean): void {
@@ -147,6 +155,8 @@ export class PixijsRenderer implements Renderer2 {
     }
     if (!parent || !parent.children) return;
     const index = parent.children.findIndex((i: any) => i.uid === oldChild.uid);
+    // Already detached -- nothing to remove, and `removeChildAt(-1)` throws.
+    if (index === -1) return;
     parent.removeChildAt(index);
   }
 
