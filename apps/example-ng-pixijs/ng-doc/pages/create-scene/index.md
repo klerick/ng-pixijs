@@ -18,6 +18,28 @@ Import the `PixiSceneComponent` into the Angular component where you want to cre
 <pixi-scene ngSkipHydration [pixiJsConfig]="pixiJsConfig()" />
 ```
 
+## Size
+
+The scene draws into a canvas the size of its host element. pixi measures that host when the
+application starts and again whenever the **window** resizes — nothing else. A host that changes
+size on its own, because its content got wider or a sidebar collapsed next to it, keeps the old
+canvas: nothing is drawn past its edge.
+
+Set `followHost` when the host can change size like that:
+
+```html
+<pixi-scene ngSkipHydration followHost [pixiJsConfig]="pixiJsConfig()" />
+```
+
+The scene then observes its host and resizes the canvas with it. It also makes the host
+`display: block`: `<pixi-scene>` is an inline element by default, and an inline box measures 0×0,
+so pixi would fall back to the `width` and `height` from `pixiJsConfig`. Give the host a height of
+its own — a block with no height is as tall as the canvas inside it, so it can grow wider and
+narrower but never shorter.
+
+Without `followHost` nothing changes: the host stays inline, and a scene sized through
+`pixiJsConfig` keeps that size.
+
 ## Knowing whether the application started
 
 A canvas needs a working WebGL or 2d context, and there are places with neither — hardware
@@ -36,19 +58,23 @@ stays the business of the stage and its own components, which have `onPixiInit` 
 ```
 
 `pixiInit` hands over the `Application` itself, so anything that belongs to whoever owns the
-scene — following the size of the host box, for instance — can live there rather than being
+scene — pausing and resuming it, for instance — can live there rather than being
 smuggled into a stage:
 
 ```typescript group="scene-outputs" name="scene.component.ts"
 protected readonly failed = signal(false);
+private app?: Application;
 
 protected onReady(app: Application): void {
-  const box = app.canvas.parentElement;
-  if (!box) return;
+  this.app = app;
+}
 
-  const observer = new ResizeObserver(() => app.queueResize());
-  observer.observe(box);
-  inject(DestroyRef).onDestroy(() => observer.disconnect());
+protected pause(): void {
+  this.app?.stop();
+}
+
+protected resume(): void {
+  this.app?.start();
 }
 
 protected onFailed(error: unknown): void {

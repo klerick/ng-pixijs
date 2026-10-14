@@ -1,7 +1,9 @@
 import {
   afterNextRender,
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
+  effect,
   ElementRef,
   HostListener,
   inject,
@@ -30,7 +32,9 @@ import {
  * DI rather than through inputs.
  *
  * The scene sizes itself to its host element, so give that host a height --
- * a box with no height hands pixi a zero-sized renderer.
+ * a box with no height hands pixi a zero-sized renderer. pixi re-measures the
+ * host only when the window resizes; set `followHost` for a host that changes
+ * size on its own.
  *
  * ```html
  * <pixi-scene
@@ -48,8 +52,12 @@ import {
   imports: [],
   template: ` <canvas #pixiCanvas style="display: block;"></canvas> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // Through a class rather than `[style.display]`: no stylesheet rule beats an
+  // inline style, while this one a consumer can still override with their own.
+  styles: `:host(.pixi-scene-follow-host) { display: block; }`,
   host: {
     ngSkipHydration: 'true',
+    '[class.pixi-scene-follow-host]': 'followHost()',
   },
   standalone: true,
   providers: [
@@ -89,6 +97,21 @@ export class PixiSceneComponent implements OnDestroy {
   >({});
 
   /**
+   * Resize the canvas whenever the host changes size, not only the window.
+   *
+   * pixi's `ResizePlugin` re-measures the host only on the window's `resize`
+   * event, so a host that grows or shrinks for any other reason -- its content,
+   * a collapsing sidebar -- keeps the old canvas. With this set the scene
+   * observes its host and asks pixi to resize.
+   *
+   * It also makes the host `display: block`. The element is inline by default,
+   * and an inline box measures 0x0: pixi then keeps the size from `pixiJsConfig`
+   * and an observer would never report a change. Off by default, so scenes
+   * that size the canvas through `pixiJsConfig` keep their layout.
+   */
+  followHost = input(false, { transform: booleanAttribute });
+
+  /**
    * The pixi `Application`, once it has started.
    *
    * Answers one question only -- did the application come up -- and hands the
@@ -113,6 +136,10 @@ export class PixiSceneComponent implements OnDestroy {
   /** @internal */
   constructor() {
     afterNextRender({ write: () => this.createApplication() });
+    effect((onCleanup) => {
+      if (!this.followHost() || !this.pixiJsInit()) return;
+      onCleanup(this.observeHost());
+    });
   }
 
   private createApplication() {
@@ -146,6 +173,21 @@ export class PixiSceneComponent implements OnDestroy {
           this.initError.emit(error);
         }
       );
+  }
+
+  /**
+   * Starts observing the host and returns what stops it.
+   *
+   * Runs only once the application is up -- before that there is no renderer to
+   * resize, and `init()` measures the host itself. `queueResize()` resizes on the
+   * next animation frame and cancels a pending one, so a burst of observations
+   * costs a single resize and stays clear of the "ResizeObserver loop" error.
+   */
+  private observeHost(): () => void {
+    if (typeof ResizeObserver === 'undefined') return () => undefined;
+    const observer = new ResizeObserver(() => this.application.queueResize());
+    observer.observe(this.elementRef.nativeElement);
+    return () => observer.disconnect();
   }
 
   /** @internal Angular calls this; consumers never do. */
