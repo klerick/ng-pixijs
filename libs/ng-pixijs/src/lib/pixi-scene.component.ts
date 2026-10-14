@@ -84,6 +84,10 @@ export class PixiSceneComponent implements OnDestroy {
   private pixiCanvas =
     viewChild.required<ElementRef<HTMLCanvasElement>>('pixiCanvas');
 
+  /** `init()` has resolved or rejected. */
+  private settled = false;
+  private destroyed = false;
+
   /**
    * Options handed to `Application.init()`.
    *
@@ -118,6 +122,10 @@ export class PixiSceneComponent implements OnDestroy {
    * instance to whoever owns this scene, so the surrounding component can drive
    * it without reaching in through a stage. What the scene *contains* stays the
    * business of the stage and its own components.
+   *
+   * Does not fire for a scene destroyed before the application came up: that
+   * application is destroyed as soon as `init()` settles, and neither output
+   * reports it.
    */
   pixiInit = output<Application>();
 
@@ -156,6 +164,13 @@ export class PixiSceneComponent implements OnDestroy {
       })
       .then(
         () => {
+          this.settled = true;
+          // The scene went away while `init()` was pending. Nothing can reach
+          // this application any more, and nothing else would destroy it.
+          if (this.destroyed) {
+            this.destroyApplication();
+            return;
+          }
           this.pixiJsInit.set(true);
           this.pixiInit.emit(this.application);
         },
@@ -163,6 +178,7 @@ export class PixiSceneComponent implements OnDestroy {
         // `init()` failing and nothing else, so it cannot mistake a fault in the
         // success path for a failed initialisation.
         (error: unknown) => {
+          this.settled = true;
           // Logged as well as emitted -- an unhandled rejection at least made the
           // failure loud, and a scene that reports only to a listener nobody
           // registered would be quieter than what it replaces.
@@ -170,6 +186,10 @@ export class PixiSceneComponent implements OnDestroy {
             '[ng-pixijs] PixiJS application failed to start',
             error
           );
+          if (this.destroyed) {
+            this.destroyApplication();
+            return;
+          }
           this.initError.emit(error);
         }
       );
@@ -192,9 +212,16 @@ export class PixiSceneComponent implements OnDestroy {
 
   /** @internal Angular calls this; consumers never do. */
   ngOnDestroy(): void {
-    // `init()` may still be pending, or have rejected outright -- jsdom offers
-    // neither WebGL nor a 2d context. `renderer` is unset in that state and
-    // `destroy()` throws, which surfaces to consumers as a failed test teardown.
+    this.destroyed = true;
+    // Angular removes the scene now, but `init()` may still be pending; the
+    // application is then destroyed when it settles, in `createApplication`.
+    if (this.settled) this.destroyApplication();
+  }
+
+  private destroyApplication(): void {
+    // `init()` may have rejected outright -- jsdom offers neither WebGL nor a 2d
+    // context. `renderer` is unset in that state and `destroy()` throws, which
+    // surfaces to consumers as a failed test teardown.
     if (this.application.renderer) {
       this.application.destroy();
     }
